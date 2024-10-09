@@ -1,6 +1,10 @@
 server:
   port: 8081
   
+jwt:
+  secret: "UjV2aHR3a3Rmd1g5M0lQdFJrWm5NVkFQbW5ReDdsaUt5MjM3Y2Z3ZzZaYw=="
+
+
 spring:
   application:
     name: assessment-apigateway-ms
@@ -24,6 +28,7 @@ spring:
           uri: lb://assessment-admin-ms  # Replace with your actual service name registered in Eureka
           predicates:
             - Path=/admin/**
+            
           filters:
             - JwtAuthenticationFilter
             
@@ -31,3 +36,11 @@ spring:
           uri: lb://assessment-authentication-ms
           predicates:
             - Path=/auth/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+    prefer-ip-address: true

@@ -14,11 +14,6 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
-          
-  config:
-    import: optional:configserver:http://localhost:8888  # Config server URL
-
-
 eureka:
   client:
     service-url:

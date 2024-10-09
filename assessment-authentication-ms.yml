@@ -1,4 +1,34 @@
 server:
   port: 0
+  
 jwt:
   secret: "UjV2aHR3a3Rmd1g5M0lQdFJrWm5NVkFQbW5ReDdsaUt5MjM3Y2Z3ZzZaYw=="
+
+spring:
+  application:
+    name: assessment-authentication-ms
+    
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+          
+  config:
+    import: optional:configserver:http://localhost:8888  # Config server URL
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:5000/eureka
+  instance:
+    instance-id: ${spring.application.name}:${random.value}
+    prefer-ip-address: true
+    
+pivotal:
+  apigateway:
+    name: assessment-apigateway-ms
+
+    
